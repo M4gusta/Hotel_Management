@@ -13,8 +13,12 @@ import java.util.List;
 @RequestMapping("/api")
 public class GuestController{
 
+    private final GuestRepository guestRepository;
+
     @Autowired
-    GuestRepository guestRepository;
+    public GuestController(GuestRepository guestRepository) {
+        this.guestRepository = guestRepository;
+    }
 
     @GetMapping("/guests")
     public List<Guest> findAll(){

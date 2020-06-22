@@ -13,8 +13,12 @@ import java.util.List;
 @RequestMapping("/api")
 public class RoomsCatController {
 
+    private final RoomsCatRepository roomsCatRepository;
+
     @Autowired
-    RoomsCatRepository roomsCatRepository;
+    public RoomsCatController(RoomsCatRepository roomsCatRepository) {
+        this.roomsCatRepository = roomsCatRepository;
+    }
 
     @GetMapping("/roomscat")
     public List<RoomsCat> findAll(){

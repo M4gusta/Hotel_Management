@@ -13,8 +13,12 @@ import java.util.List;
 @RequestMapping("/api")
 public class RoomController {
 
-    @Autowired
-    RoomRepository roomRepository;
+
+    private final RoomRepository roomRepository;
+
+    public RoomController(RoomRepository roomRepository) {
+        this.roomRepository = roomRepository;
+    }
 
     @GetMapping("/rooms")
     public List<Room> findAll(){
