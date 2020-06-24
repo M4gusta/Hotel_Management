@@ -30,8 +30,8 @@ public class RoomController {
     }
 
     @GetMapping("/rooms/cat/{category}")
-    public List<Room> getRoomsByCategory(@PathVariable(value = "category")String roomsCat){
-        return roomRepository.findByroomCat(roomsCat);
+    public List<Room> getRoomsByCategory(@PathVariable(value = "category")String roomCat){
+        return roomRepository.findByRoomCat(roomCat);
     }
 
     @PostMapping("/rooms")
@@ -41,8 +41,8 @@ public class RoomController {
 
     @PutMapping("/rooms/{id}")
     public void updateRoom(@PathVariable(value = "id")int roomId, @Valid @RequestBody Room room){
-        Room room1 = roomRepository.findById(roomId).orElseThrow();
-        room.setRoomNum(room1.getRoomNum());
+        //Room room1 = roomRepository.findById(roomId).orElseThrow();
+        room.setRoomNum(roomId);
 
         roomRepository.save(room);
     }

@@ -31,7 +31,7 @@ public class GuestController{
         return guestRepository.findById(guestId).orElseThrow();
     }
 
-    @GetMapping("/guests/{fname}&{lname}")
+    @GetMapping("/guests/?fname={fname}&lname={lname}")
     public List<Guest> getGuestByFirstAndLastName(@PathVariable(value = "fname") String fName, @PathVariable(value = "lname") String lName){
         return guestRepository.findByFirstNameAndLastName(fName, lName);
     }
@@ -43,8 +43,8 @@ public class GuestController{
 
     @PutMapping("/guests/{id}")
     public void updateGuest(@PathVariable(value = "id") int guestId, @Valid @RequestBody Guest guest){
-        Guest guest1 = guestRepository.findById(guestId).orElseThrow();
-        guest.setGuestId(guest1.getGuestId());
+        //Guest guest1 = guestRepository.findById(guestId).orElseThrow();
+        guest.setGuestId(guestId);
 
         guestRepository.save(guest);
     }

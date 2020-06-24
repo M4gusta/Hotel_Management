@@ -33,7 +33,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees/?fname={fname}&lname={lname}")
-    public Employee findEmployeeByName(@PathVariable(value = "fname") String fName, @PathVariable(value = "lname") String lName){
+    public List<Employee> findEmployeeByName(@PathVariable(value = "fname") String fName, @PathVariable(value = "lname") String lName){
         return employeeRepository.findByFirstNameAndLastName(fName, lName);
     }
 
@@ -45,8 +45,8 @@ public class EmployeeController {
 
     @PutMapping("/employees/{id}")
     public void updateEmployee(@PathVariable(value = "id")int empId, @Valid @RequestBody Employee employee){
-        Employee employee1 = employeeRepository.findById(empId).orElseThrow();
-        employee.setEmployeeId(employee1.getEmployeeId());
+        //Employee employee1 = employeeRepository.findById(empId).orElseThrow();
+        employee.setEmployeeId(empId);
 
         employeeRepository.save(employee);
     }

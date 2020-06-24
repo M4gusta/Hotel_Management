@@ -37,7 +37,7 @@ public class RoomsCatController {
 
     @PutMapping("/roomscat/{id}")
     public void updateRoomsCategory(@PathVariable(value = "id")int id, @Validated @RequestBody RoomsCat roomsCat){
-        RoomsCat roomsCat1 = roomsCatRepository.findById(id).orElseThrow();
+        //RoomsCat roomsCat1 = roomsCatRepository.findById(id).orElseThrow();
 
         roomsCat.setCatId(id);
 

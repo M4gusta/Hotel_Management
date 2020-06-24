@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface RoomRepository extends JpaRepository <Room, Integer> {
 
-    List<Room> findByroomCat(String category);
+    List<Room> findByRoomCat(String category);
 }
