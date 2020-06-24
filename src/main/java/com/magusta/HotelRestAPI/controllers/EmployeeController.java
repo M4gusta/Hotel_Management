@@ -5,9 +5,9 @@ import com.magusta.HotelRestAPI.models.Employee;
 import com.magusta.HotelRestAPI.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -32,23 +32,23 @@ public class EmployeeController {
         return employeeRepository.findById(empId).orElseThrow();
     }
 
-    @GetMapping("/employees/{fname}&{lname}")
-    public List<Employee> findByFirstnameAndLastname(@PathVariable(value = "fname") String fName, @PathVariable(value = "lname") String lName){
+    @GetMapping("/employees/?fname={fname}&lname={lname}")
+    public Employee findEmployeeByName(@PathVariable(value = "fname") String fName, @PathVariable(value = "lname") String lName){
         return employeeRepository.findByFirstNameAndLastName(fName, lName);
     }
 
 
     @PostMapping("/employees")
-    public Employee insertEmployee(@Validated @RequestBody Employee employee){
-        return employeeRepository.save(employee);
+    public void insertEmployee(@Valid @RequestBody Employee employee){
+        employeeRepository.save(employee);
     }
 
     @PutMapping("/employees/{id}")
-    public Employee updateEmployee(@PathVariable(value = "id")int empId, @Validated @RequestBody Employee employee){
+    public void updateEmployee(@PathVariable(value = "id")int empId, @Valid @RequestBody Employee employee){
         Employee employee1 = employeeRepository.findById(empId).orElseThrow();
         employee.setEmployeeId(employee1.getEmployeeId());
 
-        return employeeRepository.save(employee);
+        employeeRepository.save(employee);
     }
 
     @DeleteMapping("/employees/{id}")

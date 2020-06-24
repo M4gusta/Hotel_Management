@@ -14,7 +14,6 @@ import java.util.Date;
 @Table(name = "rooms")
 //createdDate i modifiedDate są ignorowane przy POST i PUT, jedynie są dołączane przy GET
 @JsonIgnoreProperties(value = {"createdDate", "modifiedDate"}, allowGetters = true)
-//
 @EntityListeners(AuditingEntityListener.class)
 public class Room {
 
@@ -42,6 +41,12 @@ public class Room {
     @Column(nullable = false)
     @LastModifiedDate
     private Date modifiedDate;
+
+    public Room(int roomNum, @NotBlank String roomCat, int space) {
+        this.roomNum = roomNum;
+        this.roomCat = roomCat;
+        this.space = space;
+    }
 
     public Date getCreatedDate() {
         return createdDate;

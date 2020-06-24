@@ -32,7 +32,7 @@ public class Guest {
 
     @Email
     private String mail;
-    @NotBlank
+
     private int numOfAdults;
 
     private int numOfChildren;
@@ -52,6 +52,12 @@ public class Guest {
     @Column(nullable = false)
     @LastModifiedDate
     private Date modifiedDate;
+
+    public Guest(@NotBlank String firstName, @NotBlank String lastName, @Email String mail) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.mail = mail;
+    }
 
     public Date getCreatedDate() {
         return createdDate;

@@ -2,11 +2,10 @@ package com.magusta.HotelRestAPI.controllers;
 
 import com.magusta.HotelRestAPI.models.Room;
 import com.magusta.HotelRestAPI.repositories.RoomRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -21,31 +20,31 @@ public class RoomController {
     }
 
     @GetMapping("/rooms")
-    public List<Room> findAll(){
+    public List<Room> getAllRooms(){
         return roomRepository.findAll();
     }
 
     @GetMapping("/rooms/{id:[\\d]+}")
-    public Room findById(@PathVariable(value = "id")int roomId){
+    public Room getRoomById(@PathVariable(value = "id")int roomId){
         return roomRepository.findById(roomId).orElseThrow();
     }
 
     @GetMapping("/rooms/cat/{category}")
-    public List<Room> findByCategory(@PathVariable(value = "category")String roomsCat){
+    public List<Room> getRoomsByCategory(@PathVariable(value = "category")String roomsCat){
         return roomRepository.findByroomCat(roomsCat);
     }
 
     @PostMapping("/rooms")
-    public Room insertRoom(@RequestBody @Validated Room room){
-        return roomRepository.save(room);
+    public void insertRoom(@RequestBody @Valid Room room){
+        roomRepository.save(room);
     }
 
     @PutMapping("/rooms/{id}")
-    public Room updateRoom(@PathVariable(value = "id")int roomId, @Validated @RequestBody Room room){
+    public void updateRoom(@PathVariable(value = "id")int roomId, @Valid @RequestBody Room room){
         Room room1 = roomRepository.findById(roomId).orElseThrow();
         room.setRoomNum(room1.getRoomNum());
 
-        return roomRepository.save(room);
+        roomRepository.save(room);
     }
 
     @DeleteMapping("/rooms/{id}")

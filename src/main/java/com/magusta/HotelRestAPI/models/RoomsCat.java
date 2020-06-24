@@ -37,6 +37,11 @@ public class RoomsCat {
     @LastModifiedDate
     private Date modifiedDate;
 
+    public RoomsCat(@NotBlank String nameOfCat, boolean kitchen) {
+        this.nameOfCat = nameOfCat;
+        this.kitchen = kitchen;
+    }
+
     public Date getCreatedDate() {
         return createdDate;
     }

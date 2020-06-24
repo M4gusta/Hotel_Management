@@ -7,8 +7,9 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import java.sql.Date;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
+
 
 @Entity
 @Table(name = "employees")
@@ -20,21 +21,21 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int employeeId;
 
-    @NotBlank
+    @NotNull
     private String firstName;
 
-    @NotBlank
+    @NotNull
     private String lastName;
 
     private char sex;
 
-    @NotBlank
-    private Date dateOfBirth;
+    @NotNull
+    private int dateOfBirth;
 
-    @NotBlank
+    @NotNull
     private int salary;
 
-    @NotBlank
+    @NotNull
     private String position;
 
     private int superId;
@@ -46,6 +47,15 @@ public class Employee {
     @Column(nullable = false)
     @LastModifiedDate
     private Date modifiedDate;
+
+    public Employee(@NotNull String firstName, @NotNull String lastName, @NotNull int dateOfBirth, @NotNull int salary, @NotNull String position) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.salary = salary;
+        this.position = position;
+    }
+
 
     public Date getCreatedDate() {
         return createdDate;
@@ -87,11 +97,11 @@ public class Employee {
         this.employeeId = employeeId;
     }
 
-    public Date getDateOfBirth() {
+    public int getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(int dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

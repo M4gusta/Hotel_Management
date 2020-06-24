@@ -21,31 +21,31 @@ public class RoomsCatController {
     }
 
     @GetMapping("/roomscat")
-    public List<RoomsCat> findAll(){
+    public List<RoomsCat> getAllCategories(){
         return roomsCatRepository.findAll();
     }
 
     @GetMapping("/roomscat/{id}")
-    public RoomsCat findById(@PathVariable(value = "id")int id){
+    public RoomsCat getCategoryById(@PathVariable(value = "id")int id){
         return roomsCatRepository.findById(id).orElseThrow();
     }
 
     @PostMapping("/roomscat")
-    public RoomsCat insertRoomsCat(@Validated @RequestBody RoomsCat roomsCat){
-        return roomsCatRepository.save(roomsCat);
+    public void insertRoomsCategory(@Validated @RequestBody RoomsCat roomsCat){
+        roomsCatRepository.save(roomsCat);
     }
 
     @PutMapping("/roomscat/{id}")
-    public RoomsCat updateRoomsCat(@PathVariable(value = "id")int id, @Validated @RequestBody RoomsCat roomsCat){
+    public void updateRoomsCategory(@PathVariable(value = "id")int id, @Validated @RequestBody RoomsCat roomsCat){
         RoomsCat roomsCat1 = roomsCatRepository.findById(id).orElseThrow();
 
-        roomsCat.setCatId(roomsCat1.getCatId());
+        roomsCat.setCatId(id);
 
-        return roomsCatRepository.save(roomsCat);
+        roomsCatRepository.save(roomsCat);
     }
 
     @DeleteMapping("/roomscat/{id}")
-    public ResponseEntity<?> deleteRoomsCat(@PathVariable(value = "id")int id){
+    public ResponseEntity<?> deleteRoomsCategory(@PathVariable(value = "id")int id){
         RoomsCat roomsCat = roomsCatRepository.findById(id).orElseThrow();
         roomsCatRepository.delete(roomsCat);
 
